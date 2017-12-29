@@ -10,12 +10,18 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --prod"
+    "postinstall": "ng build --aot --prod"
+  },
+  "engines": {
+    "node": "9.3.0",
+    "npm": "5.5.1"
   },
   "dependencies": {
     "@angular/animations": "^5.0.0",
     "@angular/common": "^5.0.0",
+    "@angular/cli": "1.6.3",
     "@angular/compiler": "^5.0.0",
+    "@angular/compiler-cli": "^5.0.0",
     "@angular/core": "^5.0.0",
     "@angular/forms": "^5.0.0",
     "@angular/http": "^5.0.0",
@@ -32,6 +38,7 @@
     "morgan": "~1.9.0",
     "pug": "2.0.0-beta11",
     "rxjs": "^5.5.2",
+    "typescript": "~2.4.2",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
