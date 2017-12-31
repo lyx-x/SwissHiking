@@ -1,4 +1,7 @@
-<router-outlet></router-outlet>
+<app-map #mapComponent></app-map>
 <div id="search" class="overlay">
   <app-search></app-search>
+</div>
+<div id="stats" class="overlay">
+  <app-stats [mapComponent]="mapComponent"></app-stats>
 </div>
