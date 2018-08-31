@@ -28,7 +28,7 @@ export class MapService {
     this.setView([51.505, -0.09], 13);
   }
 
-  public setView(center, zoom) {
+  setView(center, zoom) {
     this.map.setView(center, zoom);
   }
 
