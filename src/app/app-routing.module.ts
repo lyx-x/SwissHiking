@@ -4,7 +4,8 @@ import { RouterModule, Routes }  from '@angular/router';
 import { MapComponent } from "./map/map.component";
 
 const appRoutes: Routes = [
-  { path: '**', redirectTo: ''}
+  { path: '', component: MapComponent},
+  { path: '**', redirectTo: ''},
 ];
 
 @NgModule({

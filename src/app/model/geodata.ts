@@ -1,7 +1,4 @@
-import { GeoJSON } from "leaflet";
-
-export class GeoJSONWrapper {
+export class GeoDataInfo {
   type: string;
-  properties: {};
-  data: GeoJSON[];
+  year: string;
 }
