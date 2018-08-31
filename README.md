@@ -1,1 +1,1 @@
-# Geographic data visualization
+# Hiking routes in Switzerland
