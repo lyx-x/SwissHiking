@@ -30,8 +30,21 @@ export class MapService {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         this.setView([position.coords.latitude, position.coords.longitude], this.map.getZoom());
-      }, (msg) => {
-        alert('Unable to get location.');
+      },  (err) => {
+        switch(err.code) {
+          case err.PERMISSION_DENIED:
+            alert("User denied the request for Geolocation.");
+            break;
+          case err.POSITION_UNAVAILABLE:
+            alert( "Location information is unavailable.");
+            break;
+          case err.TIMEOUT:
+            alert("The request to get user location timed out.");
+            break;
+          default:
+            alert("An unknown error occurred.");
+            break;
+        }
       }, {enableHighAccuracy: true});
     } else {
       alert("Geolocation is not supported by this browser.");
