@@ -25,7 +25,18 @@ export class MapService {
     L.control.zoom({ position: "bottomright" }).addTo(this.map);
     L.control.scale().addTo(this.map);
 
-    this.setView([51.505, -0.09], 13);
+    this.setView([47.3769, -8.5417], 13);
+
+    if (navigator.geolocation) {
+      navigator.geolocation.watchPosition((position) => {
+        this.setView([position.coords.latitude, position.coords.longitude], this.map.getZoom());
+      }, (msg) => {
+        alert('Please enable your GPS position future.');
+      }, {enableHighAccuracy: true});
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
+
   }
 
   setView(center, zoom) {
