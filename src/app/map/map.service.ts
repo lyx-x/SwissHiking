@@ -28,10 +28,10 @@ export class MapService {
     this.setView([47.3769, -8.5417], 13);
 
     if (navigator.geolocation) {
-      navigator.geolocation.watchPosition((position) => {
+      navigator.geolocation.getCurrentPosition((position) => {
         this.setView([position.coords.latitude, position.coords.longitude], this.map.getZoom());
       }, (msg) => {
-        alert('Please enable your GPS position future.');
+        alert('Unable to get location.');
       }, {enableHighAccuracy: true});
     } else {
       alert("Geolocation is not supported by this browser.");
