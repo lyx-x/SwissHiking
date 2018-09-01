@@ -3,11 +3,21 @@ import * as L from "leaflet";
 
 @Injectable()
 export class MapService {
-  public map: L.Map;
-  public baseMap: L.Layer;
+  private map: L.Map;
+  private baseMap: L.Layer;
+  private location: L.Marker;
 
   constructor() {
-
+    this.location = L.marker(
+      [47.3769, -8.5417],
+      {
+        'icon': L.icon({
+          iconUrl: 'assets/img/bluecircle.png',
+          className: 'location-icon'
+        }),
+        'interactive': false
+      }
+    );
   }
 
   init() {
@@ -68,16 +78,12 @@ export class MapService {
   setCurrentLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
+        // center around the current location
         this.map.panTo([position.coords.latitude, position.coords.longitude]);
-        L.marker(
-          [position.coords.latitude, position.coords.longitude],
-          {
-            'icon': L.icon({
-              iconUrl: 'assets/img/bluecircle.png',
-              className: 'location-icon'
-            })
-          }
-        ).addTo(this.map);
+        // change the coordinates of the marker
+        this.location.setLatLng([position.coords.latitude, position.coords.longitude]);
+        // add the marker to the map, if it has been added, nothing will happen
+        this.location.addTo(this.map);
       },  (err) => {
         switch(err.code) {
           case err.PERMISSION_DENIED:
