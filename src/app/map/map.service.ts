@@ -26,10 +26,58 @@ export class MapService {
     L.control.scale().addTo(this.map);
 
     this.setView([47.3769, -8.5417], 13);
+    this.setCurrentLocation();
 
+    class LocationControl extends L.Control {
+      private mapService: MapService;
+
+      constructor(mapService: MapService, opts) {
+        super(opts);
+        this.mapService = mapService;
+      }
+
+      onAdd(map) {
+        let div = L.DomUtil.create('div', 'leaflet-bar');
+        let button = L.DomUtil.create('a', 'leaflet-touch location-control', div);
+
+        button.setAttribute('href', '#');
+        button.setAttribute('role', 'button');
+        button.setAttribute('aria-label', 'Go to current location');
+        button.setAttribute('title', 'Go to current location');
+
+        L.DomEvent.on(button, 'click', (ev) => {
+          this.mapService.setCurrentLocation();
+        });
+
+        return div;
+      }
+
+      onRemove(map) {
+        // Nothing to do here
+      }
+    }
+
+    new LocationControl(this,{ position: 'bottomright' }).addTo(this.map);
+
+  }
+
+  setView(center, zoom) {
+    this.map.setView(center, zoom);
+  }
+
+  setCurrentLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.setView([position.coords.latitude, position.coords.longitude], this.map.getZoom());
+        this.map.panTo([position.coords.latitude, position.coords.longitude]);
+        L.marker(
+          [position.coords.latitude, position.coords.longitude],
+          {
+            'icon': L.icon({
+              iconUrl: 'assets/img/bluecircle.png',
+              className: 'location-icon'
+            })
+          }
+        ).addTo(this.map);
       },  (err) => {
         switch(err.code) {
           case err.PERMISSION_DENIED:
@@ -49,11 +97,6 @@ export class MapService {
     } else {
       alert("Geolocation is not supported by this browser.");
     }
-
-  }
-
-  setView(center, zoom) {
-    this.map.setView(center, zoom);
   }
 
 }

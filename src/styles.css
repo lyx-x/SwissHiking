@@ -22,3 +22,17 @@ html, body {
   z-index: 2;
   background: white;
 }
+
+.location-control {
+  background-color: white;
+  border: grey;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  border-radius: 8px;
+}
+
+.location-icon {
+  width: 1.2em;
+  height: 1.2em;
+}
