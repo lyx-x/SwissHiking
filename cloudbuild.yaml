@@ -1,6 +1,7 @@
 steps:
 - name: 'gcr.io/cloud-builders/git'
   args: ['clone', 'https://github.com/lyx-x/SwissHiking.git']
+  env: ['PROJECT_ROOT=SwissHiking']
 - name: 'gcr.io/cloud-builders/npm'
   args: ['install']
 - name: 'gcr.io/cloud-builders/gcloud'
