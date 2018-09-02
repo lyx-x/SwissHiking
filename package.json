@@ -18,7 +18,7 @@
     "deploy": "gcloud app deploy"
   },
   "engines": {
-    "node": "8.10.0",
+    "node": "~8",
     "npm": "6.4.1"
   },
   "dependencies": {
