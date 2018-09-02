@@ -17,3 +17,29 @@ html, body {
   width: 100%;
 }
 
+.location-control {
+  font-size: 24px;
+}
+
+.location-icon {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.menu-control {
+  display: inline-block;
+  font-size: 24px;
+}
+
+.menu {
+  display: inline-block;
+  background-color: white;
+  width: 50em;
+  height: 20em;
+}
+
+.menu.menu-inactive {
+  display: none;
+}
+
+

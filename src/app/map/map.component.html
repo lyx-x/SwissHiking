@@ -1,1 +1,20 @@
 <div id="map"></div>
+<div id="search" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Please choose a hiking track</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="list-group" role="tablist">
+          <a *ngFor="let track of trackInfos"
+             href="#" role="tab" data-toggle="list"
+             class="list-group-item list-group-item-action {{track.isValid ? '' : 'disabled'}}" (click)="pickTrack(track)">{{ track.displayedTest }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
