@@ -14,9 +14,8 @@ export class TrackService {
   getTracks(): TrackInfo[] {
     // return all available tracks and their source
     return [
-      new TrackInfo('SchweizMobil', '859', 'something'),
-      new TrackInfo('SchweizMobil', '2', '2'),
-      new TrackInfo('SchweizMobil', '3000', '3'),
+      new TrackInfo('SchweizMobil', '859', '859 Zürcher Weinland Weg (Andelfingen–Dachsen)'),
+      new TrackInfo('SchweizMobil', '863', '863 Rosinli-Rundweg (Kempten–Kempten)'),
     ]
   }
 
@@ -67,7 +66,7 @@ export class TrackService {
 }
 
 export class TrackInfo {
-  private isValid: boolean = true;
+  isValid: boolean = true;
 
   constructor(public source: string, public id: string, public displayedTest: string) {
 

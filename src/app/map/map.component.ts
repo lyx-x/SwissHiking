@@ -121,7 +121,7 @@ class LocationControl extends L.Control {
   onAdd(map) {
     let div = L.DomUtil.create('div', 'leaflet-bar');
     let button = L.DomUtil.create('a', 'leaflet-touch location-control', div);
-    button.innerText = '>';
+    button.innerText = '📡';
 
     button.setAttribute('href', '#');
     button.setAttribute('role', 'button');
@@ -151,7 +151,7 @@ class TrackControl extends L.Control {
     buttonDiv.setAttribute('id', 'search-button');
 
     let button = L.DomUtil.create('a', 'leaflet-touch menu-control', buttonDiv);
-    button.innerText = '<';
+    button.innerText = '🏞';
 
     button.setAttribute('href', '#');
     button.setAttribute('role', 'button');

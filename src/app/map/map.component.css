@@ -16,3 +16,15 @@
   left: 0;
 }
 
+/*
+ Modal appears at the bottom
+ */
+.modal-dialog {
+  position: relative;
+  top: 60%;
+}
+
+.modal-body {
+  max-height: 27vh;
+  overflow-y: auto;
+}
