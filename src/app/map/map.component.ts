@@ -56,7 +56,6 @@ export class MapComponent implements OnInit {
     new TrackControl(this,{ position: 'bottomright' }).addTo(this.map);
 
     this.setView([47.36667, 8.55], 13);
-    this.setCurrentLocation();
   }
 
   setView(center, zoom) {
