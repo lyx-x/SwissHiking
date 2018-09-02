@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lyx-x/SwissHiking.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "node ./bin/www",
@@ -10,11 +14,12 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot --prod"
+    "postinstall": "ng build --aot --prod",
+    "deploy": "gcloud app deploy"
   },
   "engines": {
-    "node": "10.9.0",
-    "npm": "6.2.0"
+    "node": "8.10.0",
+    "npm": "3.5.2"
   },
   "dependencies": {
     "@angular/animations": "6.1.6",
