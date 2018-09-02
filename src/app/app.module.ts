@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TrackService } from './track/track.service';
+import { MatchKeyPipe } from "./track/track.pipe";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapComponent
+    MapComponent,
+    MatchKeyPipe
   ],
   imports: [
     BrowserModule,
