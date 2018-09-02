@@ -3,4 +3,4 @@ steps:
   args: ['clone', 'https://github.com/lyx-x/SwissHiking.git']
   env: ['PROJECT_ROOT=SwissHiking']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['app', 'deploy']
+  args: ['app', 'deploy', 'SwissHiking/']
