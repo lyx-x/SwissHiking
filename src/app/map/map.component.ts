@@ -75,21 +75,22 @@ export class MapComponent implements OnInit {
       },  (err) => {
         switch(err.code) {
           case err.PERMISSION_DENIED:
-            alert('User denied the request for Geolocation.');
+            console.warn('User denied the request for Geolocation.');
             break;
           case err.POSITION_UNAVAILABLE:
-            alert('Location information is unavailable.');
+            console.warn('Location information is unavailable.');
             break;
           case err.TIMEOUT:
-            alert('The request to get user location timed out.');
+            console.warn('The request to get user location timed out.');
             break;
           default:
-            alert('An unknown error occurred.');
+            console.warn('An unknown error occurred.');
             break;
         }
+        this.location.removeFrom(this.map);
       }, { enableHighAccuracy: true });
     } else {
-      alert('Geolocation is not supported by this browser.');
+      console.warn('Geolocation is not supported by this browser.');
     }
   }
 
