@@ -39,7 +39,8 @@ export class MapComponent implements OnInit {
 
   ngOnInit() {
     let osmUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    let osmAttrib = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>';
+    let osmAttrib = '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, ' +
+      '<a href="https://www.schweizmobil.ch/en/copyright-privacy-policy.html">SwitzerlandMobility</a>';
     let baseMap = L.tileLayer(osmUrl, {maxZoom: 19, attribution: osmAttrib});
 
     // this must not be called in the constructor because the div in html should be constructed first
