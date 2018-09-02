@@ -2,7 +2,9 @@ steps:
 - name: 'gcr.io/cloud-builders/git'
   args: ['clone', 'https://github.com/lyx-x/SwissHiking.git']
 - name: 'gcr.io/cloud-builders/npm'
-  args: ['install', 'SwissHiking/package.json']
+  args: ['install']
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['run', 'build', '--aot', '--prod']
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['app', 'deploy', 'SwissHiking/']
+  args: ['app', 'deploy']
 timeout: '1600s'

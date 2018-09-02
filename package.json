@@ -3,6 +3,10 @@
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lyx-x/SwissHiking.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "node ./bin/www",
