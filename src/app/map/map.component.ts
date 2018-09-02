@@ -52,7 +52,7 @@ export class MapComponent implements OnInit {
     L.control.scale().addTo(this.map);
 
     new LocationControl(this,{ position: 'bottomright' }).addTo(this.map);
-    new TrackControl(this,{ position: 'topleft' }).addTo(this.map);
+    new TrackControl(this,{ position: 'bottomright' }).addTo(this.map);
 
     this.setView([47.36667, 8.55], 13);
     this.setCurrentLocation();
@@ -109,10 +109,9 @@ export class MapComponent implements OnInit {
       this.routeMap.removeFrom(this.map);
     }
     this.routeMap = L.geoJSON(route).addTo(this.map);
-    this.map.panTo(L.latLng(route['coordinates'][0][1], route['coordinates'][0][0]));
+    this.map.fitBounds(route.coordinates.map(pt => L.latLng(pt[1], pt[0])));
   }
 }
-
 
 class LocationControl extends L.Control {
   constructor(private mapComponent: MapComponent, opts) {
@@ -152,6 +151,7 @@ class TrackControl extends L.Control {
     buttonDiv.setAttribute('id', 'search-button');
 
     let button = L.DomUtil.create('a', 'leaflet-touch menu-control', buttonDiv);
+    button.innerText = '<';
 
     button.setAttribute('href', '#');
     button.setAttribute('role', 'button');

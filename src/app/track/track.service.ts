@@ -38,17 +38,24 @@ export class TrackService {
     this.http.get('https://map.schweizmobil.ch/api/4/query/featuresmultilayers', {params: params})
       .subscribe(
         result => {
-          let positions = ((result as FeatureCollection).features[0].geometry as MultiLineString).coordinates[0];
-          let geometry = {
-            'type': 'LineString',
-            'coordinates': []
+          let features = (result as FeatureCollection).features;
+          if (features.length > 0) {
+            let positions = (features[0].geometry as MultiLineString).coordinates[0];
+            let route = {
+              'type': 'LineString',
+              'coordinates': []
             };
 
-          positions.forEach(position => {
-            let coords = CoordinatesConverter.ch1903ToWgs84(position[0], position[1]);
-            geometry.coordinates.push([coords[0], coords[1]]);
-          });
-          this.mapComponent.updateTrackRoute(geometry);
+            positions.forEach(position => {
+              let coords = CoordinatesConverter.ch1903ToWgs84(position[0], position[1]);
+              route.coordinates.push([coords[0], coords[1]]);
+            });
+            this.mapComponent.updateTrackRoute(route);
+          }
+          else {
+            this.mapComponent.selectedTrackInfo.setInvalid();
+            console.warn(`[Warning] getSchweizMobilTrack(${id}): no feature returned`)
+          }
         },
         error => {
           this.mapComponent.selectedTrackInfo.setInvalid();
