@@ -25,6 +25,6 @@
 }
 
 .modal-body {
-  max-height: 27vh;
+  max-height: 24vh;
   overflow-y: auto;
 }
