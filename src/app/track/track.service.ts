@@ -14,6 +14,8 @@ export class TrackService {
   getTracks(): TrackInfo[] {
     // return all available tracks and their source
     return [
+      new TrackInfo('SchweizMobil', '47', '47.01 Zürich-Zugerland-Panoramaweg (Zürich (Triemli)–Albis Passhöhe)', new Map([['stage', '01']])),
+      new TrackInfo('SchweizMobil', '47', '47.02 Zürich-Zugerland-Panoramaweg (Albis Passhöhe–Zug)', new Map([['stage', '02']])),
       new TrackInfo('SchweizMobil', '859', '859 Zürcher Weinland Weg (Andelfingen–Dachsen)'),
       new TrackInfo('SchweizMobil', '863', '863 Rosinli-Rundweg (Kempten–Kempten)'),
     ]
@@ -22,17 +24,26 @@ export class TrackService {
   getTrackRoute(trackInfo: TrackInfo) {
     switch (trackInfo.source) {
       case 'SchweizMobil':
-        this.getSchweizMobilTrack(trackInfo.id);
+        this.getSchweizMobilTrack(trackInfo.id, trackInfo.params);
         break;
     }
   }
 
-  getSchweizMobilTrack(id: string) {
+  getSchweizMobilTrack(id: string, trackParams: Map<string, string>) {
     let params = new HttpParams();
-    params = params.append('WanderlandRoutenNational', id);
-    params = params.append('WanderlandRoutenRegional', id);
-    params = params.append('WanderlandRoutenLokal', id);
-    params = params.append('WanderlandRoutenHandicap', id);
+    if (trackParams == null) {
+      let value: string = id;
+      params = params.append('WanderlandRoutenNational', value);
+      params = params.append('WanderlandRoutenRegional', value);
+      params = params.append('WanderlandRoutenLokal', value);
+      params = params.append('WanderlandRoutenHandicap', value);
+    } else {
+      let value: string = id + '.' + trackParams.get('stage');
+      params = params.append('WanderlandEtappenNational', value);
+      params = params.append('WanderlandEtappenRegional', value);
+      params = params.append('WanderlandEtappenLokal', value);
+      params = params.append('WanderlandEtappenHandicap', value);
+    }
 
     this.http.get('https://map.schweizmobil.ch/api/4/query/featuresmultilayers', {params: params})
       .subscribe(
@@ -68,7 +79,7 @@ export class TrackService {
 export class TrackInfo {
   isValid: boolean = true;
 
-  constructor(public source: string, public id: string, public displayedTest: string) {
+  constructor(public source: string, public id: string, public displayedTest: string, public params: Map<string, string> = null) {
 
   }
 
