@@ -3,6 +3,6 @@ runtime: nodejs8
 # Force using HTTPS
 handlers:
 - url: /.*
-  script: true
+  script: auto
   secure: always
   redirect_http_response_code: 301
