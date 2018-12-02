@@ -17,8 +17,9 @@ sudo npm install npm --global
 cd SwissHiking
 npm install
 npm install -g @angular/cli
-
 ```
+
+You'll also need to setup authentication for Google Cloud in order to access Datastore which is required by every URL under `admin`.
 
 ### Launch
 

@@ -18,6 +18,10 @@ app.use(express.static(path.join(__dirname, 'dist')));
 const api = require('./routes/api');
 app.use('/api', api);
 
+// set our admin routes
+const admin = require('./routes/admin');
+app.use('/admin', admin);
+
 // catch all other routes and return the index file
 const defaultRoutes = require('./routes/default');
 app.use('/', defaultRoutes);

@@ -33,6 +33,7 @@
     "@angular/platform-browser": "6.1.6",
     "@angular/platform-browser-dynamic": "6.1.6",
     "@angular/router": "6.1.6",
+    "@google-cloud/datastore": "^1.4.2",
     "@types/leaflet": "^1.2.10",
     "body-parser": "1.18.2",
     "cookie-parser": "1.4.3",
@@ -44,7 +45,7 @@
     "pug": "2.0.3",
     "rxjs": "6.3.1",
     "typescript": "2.9.2",
-    "zone.js": "0.8.14"
+    "zone.js": "0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.7.0",

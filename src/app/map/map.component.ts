@@ -64,7 +64,7 @@ export class MapComponent implements OnInit {
 
   setCurrentLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
+      navigator.geolocation.watchPosition((position) => {
         // center around the current location
         this.map.panTo([position.coords.latitude, position.coords.longitude]);
         // change the coordinates of the marker
