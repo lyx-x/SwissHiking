@@ -16,6 +16,8 @@ sudo apt-get install -y nodejs
 sudo npm install npm --global
 cd SwissHiking
 npm install
+npm install -g @angular/cli
+
 ```
 
 ### Launch

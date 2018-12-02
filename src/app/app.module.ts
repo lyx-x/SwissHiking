@@ -7,13 +7,15 @@ import { MapComponent } from './map/map.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TrackService } from './track/track.service';
 import { MatchKeyPipe } from "./track/track.pipe";
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
-    MatchKeyPipe
+    MatchKeyPipe,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
