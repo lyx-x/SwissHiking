@@ -21,6 +21,9 @@
     "node": "~8",
     "npm": "~6"
   },
+  "config": {
+    "unsafe-perm": true
+  },
   "dependencies": {
     "@angular/animations": "6.1.6",
     "@angular/cli": "6.1.5",
