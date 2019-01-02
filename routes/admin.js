@@ -9,8 +9,10 @@ const topicName = 'data-updater';
 
 const dataBuffer = Buffer.from('');
 
-/* Parse the list of tracks from SchweizMobil. */
+/* Update the list of tracks from SchweizMobil. */
 router.get('/update/schweizmobil/tracklist', function (req, res, next) {
+  console.log(req.headers);
+
   // Add two custom attributes to the message
   const customAttributes = {
     source: 'SchweizMobil',
@@ -25,8 +27,10 @@ router.get('/update/schweizmobil/tracklist', function (req, res, next) {
   res.send('Track coordinates updated.')
 });
 
-/* Parse coordinates of all tracks from SchweizMobil. */
+/* Update one track info from SchweizMobil. */
 router.get('/update/schweizmobil/track', function (req, res, next) {
+  console.log(req.headers);
+  
   // Add two custom attributes to the message
   const customAttributes = {
     source: 'SchweizMobil',
