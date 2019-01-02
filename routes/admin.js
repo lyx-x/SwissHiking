@@ -1,72 +1,48 @@
 var express = require('express');
 var router = express.Router();
 
-// By default, the client will authenticate using the service account file
-// specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
-// the project specified by the GOOGLE_CLOUD_PROJECT environment variable. See
-// https://github.com/GoogleCloudPlatform/google-cloud-node/blob/master/docs/authentication.md
-// These environment variables are set automatically on Google App Engine
-const Datastore = require('@google-cloud/datastore');
+const {PubSub} = require('@google-cloud/pubsub');
 
-// Instantiate a datastore client
-const datastore = Datastore();
+// Creates a client
+const pubsub = new PubSub();
+const topicName = 'data-updater';
 
-/**
- * Insert a visit record into the database.
- *
- * @param {object} visit The visit record to insert.
- */
-function insertVisit(visit) {
-  return datastore.save({
-    key: datastore.key('visit'),
-    data: visit
-  });
-}
-
-/**
- * Retrieve the latest 10 visit records from the database.
- */
-function getVisits() {
-  const query = datastore.createQuery('visit')
-    .order('timestamp', { descending: true })
-    .limit(10);
-
-  return datastore.runQuery(query)
-    .then((results) => {
-      const entities = results[0];
-      return entities.map((entity) => `Time: ${entity.timestamp}, AddrHash: ${entity.userIp}`);
-    });
-}
+const dataBuffer = Buffer.from('');
 
 /* Parse the list of tracks from SchweizMobil. */
-router.get('/crawler/schweizmobil/tracklist', function (req, res, next) {
-  // Create a visit record to be stored in the database
-  const visit = {
-    timestamp: new Date(),
-    // Store a hash of the visitor's ip address
-    userIp: req.ip
+router.get('/update/schweizmobil/tracklist', function (req, res, next) {
+  // Add two custom attributes to the message
+  const customAttributes = {
+    source: 'SchweizMobil',
+    update_list: 'true',
   };
 
-  insertVisit(visit)
-    // Query the last 10 visits from Datastore.
-    .then(() => getVisits())
-    .then((visits) => {
-      res
-        .status(200)
-        .set('Content-Type', 'text/plain')
-        .send(`Last 10 visits:\n${visits.join('\n')}`)
-        .end();
-    })
-    .catch(next);
+  pubsub.topic(topicName)
+    .publisher()
+    .publish(dataBuffer, customAttributes)
+    .then((messageId) => console.log(`Message ${messageId} published.`));
+  
+  res.send('Track coordinates updated.')
 });
 
 /* Parse coordinates of all tracks from SchweizMobil. */
-router.get('/crawler/schweizmobil/tracks', function (req, res, next) {
+router.get('/update/schweizmobil/track', function (req, res, next) {
+  // Add two custom attributes to the message
+  const customAttributes = {
+    source: 'SchweizMobil',
+    update_track: 'true',
+  };
+
+  pubsub.topic(topicName)
+    .publisher()
+    .publish(dataBuffer, customAttributes)
+    .then((messageId) => console.log(`Message ${messageId} published.`));
+
   res.send('Track coordinates updated.')
 });
 
 /* Cleanup old data. */
-router.get('/cleaner', function (req, res, next) {
+router.get('/clean', function (req, res, next) {
   res.send('Done database cleaning.')
 });
 

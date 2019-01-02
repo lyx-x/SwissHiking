@@ -6,13 +6,13 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-app.use(logger('combined'));
+app.use(logger('tiny'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// work with Angular
-app.use(express.static(path.join(__dirname, 'dist')));
+// allow serving public files
+app.use('/static', express.static(path.join(__dirname, 'public')))
 
 // set our api routes
 const api = require('./routes/api');

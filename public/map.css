@@ -1,0 +1,35 @@
+body {
+	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	padding: 0;
+  margin: 0;
+}
+
+a {
+  color: #00B7FF;
+}
+
+html, body, #map {
+  height: 100%;
+  width: 100%;
+}
+
+.tracking-control {
+  font-size: 24px;
+}
+
+.location-icon {
+	margin-left: -0.6em;
+	margin-top: -0.6em;
+  width: 1.2em;
+  height: 1.2em;
+}
+
+/*
+	Set absolute position so other items can overlay it
+	*/
+#map {
+	position: absolute;
+	z-index: 1;
+	top: 0;
+	left: 0;
+}
