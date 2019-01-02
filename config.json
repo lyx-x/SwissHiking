@@ -1,0 +1,4 @@
+{
+  "GCLOUD_PROJECT": "swiss-hiking",
+  "DATA_BACKEND": "datastore"
+}

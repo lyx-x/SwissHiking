@@ -15,15 +15,15 @@ app.use(cookieParser());
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
 // set our api routes
-const api = require('./routes/api');
+const api = require('./backend/routes/api');
 app.use('/api', api);
 
 // set our admin routes
-const admin = require('./routes/admin');
+const admin = require('./backend/routes/admin');
 app.use('/admin', admin);
 
 // catch all other routes and return the index file
-const defaultRoutes = require('./routes/default');
+const defaultRoutes = require('./backend/routes/default');
 app.use('/', defaultRoutes);
 
 module.exports = app;
