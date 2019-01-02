@@ -1,0 +1,7 @@
+cron:
+- description: "monthly track list update job"
+  url: /admin/update/schweizmobil/tracklist
+  schedule: 3 of month 01:00
+- description: "track update job"
+  url: /admin/update/schweizmobil/track
+  schedule: every 15 minutes

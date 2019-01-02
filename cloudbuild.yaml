@@ -3,4 +3,6 @@ steps:
   args: ['install', '--unsafe-perm', '--no-color']
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['app', 'deploy']
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy', 'cron.yaml']
 timeout: '1600s'
