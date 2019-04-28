@@ -1,5 +1,5 @@
-var baseUrl = 'http://localhost:3000/'
-// var baseUrl = 'https://swiss-hiking.appspot.com/'
+// var baseUrl = 'http://localhost:3000/'
+var baseUrl = 'https://swiss-hiking.appspot.com/'
 
 // create a Vue component on a Div
 new Vue({
