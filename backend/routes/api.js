@@ -24,21 +24,21 @@ router.get('/:namespace/:kind/:name', function (req, res, next) {
 // Return a list of ids whose routes are displayable within a rectangle defined by center (lat, lon) and horizontal and vertical span
 router.get('/search/:west/:south/:east/:north', function (req, res, next) {
   var visibleStages = [];
-  var b_west = parseFloat(req.params.west);
-  var b_south = parseFloat(req.params.south);
-  var b_east = parseFloat(req.params.east);
-  var b_north = parseFloat(req.params.north);
-  for (i in stages) {
-    var a_west = stages[i]['bbox']['west'];
-    var a_south = stages[i]['bbox']['south'];
-    var a_east = stages[i]['bbox']['east'];
-    var a_north = stages[i]['bbox']['north'];
-    if (isVisible(a_west, a_south, a_east, a_north, b_west, b_south, b_east, b_north)) {
-      console.log(a_west, a_south, a_east, a_north, b_west, b_south, b_east, b_north);
-      visibleStages.push(stages[i]['key']);
+  if (initalized) {
+    var b_west = parseFloat(req.params.west);
+    var b_south = parseFloat(req.params.south);
+    var b_east = parseFloat(req.params.east);
+    var b_north = parseFloat(req.params.north);
+    for (i in stages) {
+      var a_west = stages[i]['bbox']['west'];
+      var a_south = stages[i]['bbox']['south'];
+      var a_east = stages[i]['bbox']['east'];
+      var a_north = stages[i]['bbox']['north'];
+      if (isVisible(a_west, a_south, a_east, a_north, b_west, b_south, b_east, b_north)) {
+        visibleStages.push(stages[i]['key']);
+      }
     }
   }
-  console.log(visibleStages);
   res.json(visibleStages);
 });
 
