@@ -1,21 +1,29 @@
+var baseUrl = 'http://localhost:3000/'
+// var baseUrl = 'https://swiss-hiking.appspot.com/'
+
 // create a Vue component on a Div
 new Vue({
   el: '#app',
   // map will become a reference to the Leaflet map
   // tileLayer will become a reference to the tile layer (actual map visuals)
-  // layers array will eventually contain objects
+  // tracks array will eventually contain objects
   data: {
     map: null,
     tileLayer: null,
-    layers: [],
+    tracks: new Map(),
   },
   mounted() {
+    this.initTrack();
     this.initMap();
-    this.initLayers();
   },
   // define methods that are used in mounted()
   methods: {
+    initTrack() {
+
+    },
     initMap() {
+      var self = this  // the vue object
+
       //
       // initialize the map component
       //
@@ -114,7 +122,42 @@ new Vue({
 
       L.control.tracking({ position: 'bottomright' }).addTo(this.map);
 
+      //
+      // define action after a view point change
+      //
+
+      this.map.on('moveend', function () {
+        // this is the map in this scope
+        self.fetchTracks(this.getBounds());
+      });
     },
-    initLayers() { },
+    // find all tracks in a nearby region
+    fetchTracks(latLngBounds) {
+      var west = latLngBounds.getWest();
+      var south = latLngBounds.getSouth();
+      var east = latLngBounds.getEast();
+      var north = latLngBounds.getNorth();
+      fetch(baseUrl + 'api/search/' + west + '/' + south + '/' + east + '/' + north)
+        .then(response => response.json())
+        .then(trackids => {
+          trackids.forEach((key) => {
+            console.log(key);
+            // fetch the track only if it's not fetched yet
+            if (!this.tracks.has(key)) {
+              fetch(baseUrl + 'api/SchweizMobil/Track/' + key)
+                .then(response => response.json())
+                .then(json => {
+                  var track = JSON.parse(json[0].value);
+                  var trackLayer = L.geoJSON(track)
+                  this.tracks.set(key, trackLayer);
+                  trackLayer.addTo(this.map);
+                })
+                .catch(error => console.log(error))
+            }
+          })
+        })
+        .catch(error => console.log(error))
+    },
   },
 });
+Vue.config.devtools = true;

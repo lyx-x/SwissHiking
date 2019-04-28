@@ -23,10 +23,10 @@
     "unsafe-perm": true
   },
   "dependencies": {
-    "@google-cloud/datastore": "^2.0.0",
+    "@google-cloud/datastore": "^3.1.0",
     "@google-cloud/pubsub": "^0.22.2",
-    "body-parser": "^1.18.3",
-    "cookie-parser": "^1.4.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
     "debug": "^4.1.1",
     "express": "^4.16.4",
     "leaflet": "^1.4.0",
